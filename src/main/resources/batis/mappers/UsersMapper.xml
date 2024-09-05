@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.film.folio.users.UsersDao">
+ 
+ <select id="findUsers" resultType="UsersVo">
+ 	select *
+ 	from users
+ </select>
+ 
+ <select id="findById" resultType="UsersVo">
+ 	select *
+ 	from users
+ 	where LOGIN_ID = #{loginId}
+ </select>
+ 
+ 
+ <select id="checkIdExists" resultType="boolean">
+ 	SELECT CASE WHEN COUNT(*)> 0 THEN 1 ELSE 0 END
+ 	FROM users
+ 	Where LOGIN_ID = #{id}
+ </select>
+ 
+ 
+ <insert id="addUsers">
+ 	<selectKey keyProperty="userId" order="BEFORE" resultType="String" >
+		SELECT 'USERS' || SEQ_users.NEXTVAL FROM dual
+	</selectKey>
+ 		INSERT INTO USERS 
+		(LOGIN_ID,USER_ID,EMAIL,PASSWORD,NAME)
+		values(#{loginId},#{userId},#{email},#{password},#{name})
+ </insert>
+ 
+ <update id="editUser">
+ 	update users
+ 	set LOGIN_ID = #{loginId},
+ 		EMAIL = #{email},
+ 		PASSWORD = #{password},
+ 		NAME = #{name},
+ 		UPDATED_AT = SYSDATE
+ 	where LOGIN_ID = #{loginId}
+ </update>
+ 
+ <delete id="delUser">
+ 	delete
+ 	from users
+ 	where LOGIN_ID = #{loginId}
+	
+ </delete>
+
+ </mapper>

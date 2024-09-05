@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.film.folio.diaryRepl.DiaryReplDAO">
+	
+	<select id="list" resultType="DiaryReplVo">
+		SELECT * FROM DIARYREPL 
+		WHERE DIARY_REPL_DEL = 'N' AND DIARY_ID = #{diaryId}
+    	ORDER BY DIARY_REPL_AT DESC
+	</select>
+	
+	<select id="select" resultType="DiaryReplVo">
+		SELECT DIARY_REPL_ID, DIARY_REPL_USER, DIARY_REPL_CONTENT, DIARY_REPL_AT, DIARY_REPL_OPEN, DIARY_REPL_DEL
+		FROM DIARYREPL
+		WHERE DIARY_REPL_ID = 'DiaryRepl_00002' AND DIARY_REPL_DEL = 'N'
+	</select>
+	
+	<insert id="add">
+		INSERT INTO DIARYREPL(
+			DIARY_REPL_ID, 
+			DIARY_REPL_USER, 
+			DIARY_REPL_CONTENT, 
+			DIARY_REPL_AT, 
+			DIARY_REPL_OPEN, 
+			DIARY_REPL_DEL)
+		VALUES( 
+			'DiaryRepl_' || LPAD(SEQ_DIARY_REPL.NEXTVAL, 5, '0'), 
+			#{diaryReplUser}, 
+			#{diaryReplContent}, 
+			SYSDATE, 
+			#{diaryReplOpen}, 
+			'N')
+	</insert>
+	
+	<update id="delet">
+		UPDATE DIARYREPL SET DIARY_REPL_DEL = 'N' 
+		WHERE DIARY_REPL_ID = #{diaryReplId}
+	</update>
+	
+	<update id="edit" >
+		UPDATE DIARYREPL SET
+		  	DIARY_REPL_CONTENT = #{diaryReplContent}, 
+		  	DIARY_REPL_OPEN = #{diaryReplOpen}
+		WHERE DIARY_REPL_ID = #{diaryReplId}
+	</update>
+	
+	
+</mapper>

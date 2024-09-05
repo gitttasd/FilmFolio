@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.film.folio.diary.DiaryDAO">
+	
+	<select id="list" resultType="DiaryVo">
+		SELECT * FROM DIARY 
+		WHERE DEL_AT = 'N' 
+		ORDER BY REVIEW_AT DESC
+	</select>
+	
+	<select id="countAll">
+		SELECT COUNT(*) FROM DIARY 
+		WHERE DEL_AT = 'N'
+	</select>
+	
+	<select id="select" resultType="DiaryVo">
+		SELECT DIARY_ID, LOGIN_ID, MOVIE_ID, WATCH_DATE, RATING, CONTENT, REVIEW_AT, OPEN_AT, TITLE, DEL_AT
+		FROM DIARY
+		WHERE DIARY_ID = #{diaryId} AND DEL_AT = 'N'
+	</select>
+	
+	<insert id="add">
+		INSERT INTO DIARY(
+			DIARY_ID, 
+			MOVIE_ID, 
+			WATCH_DATE, 
+			RATING, 
+			CONTENT, 
+			REVIEW_AT, 
+			OPEN_AT, 
+			TITLE,
+			DEL_AT)
+		VALUES(
+			'Diary_' || LPAD(SEQ_DIARY.NEXTVAL, 5, '0'), 
+			'영화아이디', 
+			#{watchDate}, 
+			#{rating}, 
+			#{content}, 
+			SYSDATE, 
+			#{openAt}, 
+			#{title},
+			'N')
+	</insert>
+	
+	<update id="delet">
+		UPDATE DIARY SET DEL_AT = 'Y' 
+		WHERE DIARY_ID = #{diaryId}
+	</update>
+	
+	<update id="edit" >
+		UPDATE DIARY SET
+		  	WATCH_DATE = #{watchDate}, 
+		  	RATING = #{rating}, 
+		  	CONTENT = #{content}, 
+		  	 
+		  	OPEN_AT = #{openAt}, 
+		  	TITLE = #{title}
+		WHERE DIARY_ID = #{diaryId}
+	</update>
+	
+	
+</mapper>
