@@ -1,0 +1,62 @@
+a{
+	text-decoration: none;
+}
+.btn {
+	--bs-btn-border-color: black !important;
+	--bs-btn-hover-border-color: black !important;
+}
+.btn:hover{
+	color:white !important;
+	font-weight: bold;
+	background-color: black !important;
+}
+.topSpace{
+	background-color: white;
+	padding:1.5em;
+}
+.mainSpace{
+	margin: 0;
+	padding-top: 48px;
+}
+#carousel-img{
+	background-repeat: no-repeat;
+	object-fit: cover;
+	height: 400px;
+	overflow: hidden;
+}
+.bg-body-tertiary{
+	background-image: url(/resources/image/ticket-2974645_1920.jpg);
+    background-position: center;
+}
+.fw-bold {
+	color:#fdc122;
+}
+.lead{
+	color: white;
+}
+.container>h2{
+	 text-align: center;
+	 color:black;
+	 margin-bottom: 30px;
+}
+.rotate-card {
+   transition: transform 0.8s ease;
+   transform-style: preserve-3d;
+ }
+.rotate-card:hover {
+  transform: rotateY(360deg);
+}
+.lusitana-bold {
+  font-family: "Lusitana", serif;
+  font-weight: 700;
+  font-style: normal;
+  color:#fdc122;
+}
+.noto-sans-regular {
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}

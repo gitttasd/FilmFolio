@@ -1,0 +1,64 @@
+.topSpace{
+	margin-top: 60px;
+	margin-left : 50px;
+	margin-right : 50px;
+	margin-bottom : 150px;
+	padding:1.5em;
+}
+.title{
+	font-weight: bold;
+	color: black;
+	text-align: center;
+}
+.tableHigh{
+	height: 430px;
+}
+.table{
+	border-radius: 5px;
+}
+.table td{
+	padding: 0 !important;
+}
+.table caption{
+	color: lightgray;
+}
+.table thead{
+	--bs-table-bg: black;
+	--bs-table-color: white;
+}
+.table-warning {
+    --bs-table-color: black;
+    --bs-table-bg: white !important;
+    --bs-table-border-color: lightgray !important;
+    
+    --bs-table-striped-bg: rgb(246, 245, 245) !important; /* 줄무늬 배경 색상 */
+    --bs-table-striped-color: #000; /* 줄무늬 텍스트 색상 */
+    
+    --bs-table-active-bg: black; /* 활성 배경 색상 #e6dbb9*/
+    --bs-table-active-color: #000; /* 활성 텍스트 색상 */
+    
+    --bs-table-hover-bg: rgb(192, 218, 226) !important;; /* hover 배경 색상 */
+    --bs-table-hover-color: black !important;; /* hover 텍스트 색상 */
+}
+#addBtn{
+	color: black;
+	font-weight: bold;
+	border: 3px solid lightblue;
+}
+#addBtn:hover{
+	background: lightblue;
+	color: #091b27;
+	font-weight: bold;
+	border: 3px solid lightblue;
+}
+#mainBtn{
+	color: black;
+	font-weight: bold;
+	border: 3px solid #4caf50;
+}
+#mainBtn:hover{
+	background: #4caf50;
+	color: black;
+	font-weight: bold;
+	border: 3px solid #4caf50;
+}

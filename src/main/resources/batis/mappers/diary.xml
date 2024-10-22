@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.film.folio.diary.DiaryDAO">
+	<sql id="search">
+		SELECT * FROM DIARY
+			<where>
+				LOGIN_ID = #{loginId} AND DEL_AT = 'N'
+				<if test="searchKey != null">
+					AND TITLE = LIKE CONCAT(CONCAT('%', #{searchValue} ), '%')
+				</if>
+			</where>
+		ORDER BY REVIEW_AT DESC
+	</sql>
+	
+	<select id="list" resultType="DiaryVo">
+		SELECT * FROM
+  			(SELECT sub.*, ROWNUM RNUM FROM
+     			(<include refid="search"></include>) 
+ 			 sub)
+		WHERE RNUM BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+	</select>
+	
+	<select id="countAll">
+		SELECT COUNT(*) FROM DIARY WHERE LOGIN_ID = #{loginId} AND DEL_AT = 'N'
+	</select>
+	
+	<select id="movieCountAll">
+		SELECT COUNT(*) FROM DIARY WHERE ID = #{id} AND OPEN_AT = 'Y' AND DEL_AT = 'N'
+	</select>
+	
+	<select id="select" resultType="DiaryVo">
+		SELECT * FROM DIARY
+		WHERE DIARY_ID = #{diaryId}
+	</select>
+	
+	<insert id="add" >
+		INSERT INTO DIARY(
+			DIARY_ID,
+			LOGIN_ID,
+			ID,
+			TITLE, 
+			WATCH_DATE, 
+			RATING, 
+			CONTENT, 
+			REVIEW_AT, 
+			OPEN_AT, 
+			DIARY_TITLE,
+			DEL_AT)
+		VALUES(
+			'Diary_' || LPAD(SEQ_DIARY.NEXTVAL, 5, '0'),
+			#{loginId},
+			#{id},
+			#{title},
+			#{watchDate}, 
+			#{rating}, 
+			#{content}, 
+			SYSDATE, 
+			#{openAt}, 
+			#{diaryTitle},
+			'N')
+	</insert>
+	
+	<update id="delet">
+		UPDATE DIARY SET DEL_AT = 'Y' 
+		WHERE DIARY_ID = #{diaryId}
+	</update>
+	
+	<update id="edit" >
+		UPDATE DIARY SET
+		  	WATCH_DATE = #{watchDate}, 
+		  	RATING = #{rating}, 
+		  	CONTENT = #{content}, 
+		  	 
+		  	OPEN_AT = #{openAt}, 
+		  	DIARY_TITLE = #{diaryTitle}
+		WHERE DIARY_ID = #{diaryId}
+	</update>
+	
+	<select id="diaryOpenList" resultType="DiaryVo">
+		SELECT * FROM DIARY
+		WHERE ID = #{id} AND OPEN_AT = 'Y' AND DEL_AT = 'N'
+		ORDER BY REVIEW_AT DESC
+	</select>
+	
+	<update id="upPoint">
+		UPDATE DIARY SET POINT = #{point} WHERE DIARY_ID = #{diaryId}
+	</update>
+	
+	<select id="selectPoint">
+		SELECT POINT FROM DIARY WHERE DIARY_ID = #{diaryId}
+	</select>
+</mapper>

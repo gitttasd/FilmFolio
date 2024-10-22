@@ -1,0 +1,21 @@
+.page-item .page-link{
+	color: black; /* 글자색 변경 */
+}
+.page-item .page-link:hover{
+	background-color: #fdc122; /* 배경색 변경 */
+    color: black; /* 글자색 변경 */
+    border-color: #fdc122; /* 테두리색 변경 */
+}
+.page-item.active .page-link {
+	color: white; /* 글자색 변경 */
+	border-color: #091b27;
+	background-color: #091b27;
+	font-weight : bold;
+}
+#myBtn{
+	color:#fdc122;
+	border-color: white;
+	/*background-color: rgba(253, 193, 34, 0.5);*/
+	background-color: rgba(9, 27, 39, 0.5);
+	font-weight : bold;
+}
